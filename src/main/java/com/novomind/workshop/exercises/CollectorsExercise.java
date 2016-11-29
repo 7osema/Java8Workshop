@@ -24,6 +24,8 @@ public class CollectorsExercise {
 				newNames.stream()
 				.filter(n -> !oldNames.contains(n))
 				.collect(Collectors.toList()));
+
+
 	}
 
 }
