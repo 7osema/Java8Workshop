@@ -1,14 +1,18 @@
 package com.novomind.workshop.exercises;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.Stream.Builder;
 
 import com.novomind.workshop.commons.Person;
 import com.novomind.workshop.commons.Person.Gender;
 
-public class GrouppingExercise {
+public class GroupingExercise {
 
 	public static void main(String[] args) {
 		List<Person> persons = Arrays.asList(
@@ -32,6 +36,25 @@ public class GrouppingExercise {
 		System.out.println(collect2);
 		System.out.println(collect3);
 
+
+		List<String> asList = Arrays.asList("a", "b", "c");
+		List<String> asList2 = Arrays.asList("1", "2", "3");
+
+		System.out.println(zip(asList.stream(), asList2.stream()).collect(Collectors.toList()));
 	}
 
+	private static Stream zip(Stream<String> stream1, Stream<String> stream2) {
+
+		Iterator<String> iterator1 = stream1.iterator();
+		Iterator<String> iterator2 = stream2.iterator();
+
+		Builder<Object> streamBuilder = Stream.builder();
+
+		// achtung -> forEachRemaining braucht ein consumer!
+		// andere Variante wäre iterator.forEach ...
+		iterator1.forEachRemaining(obj -> streamBuilder.add(obj).add(iterator2.next()));
+
+		return streamBuilder.build();
+
+	}
 }
