@@ -43,12 +43,12 @@ public class GroupingExercise {
 		System.out.println(zip(asList.stream(), asList2.stream()).collect(Collectors.toList()));
 	}
 
-	private static Stream zip(Stream<String> stream1, Stream<String> stream2) {
+	private static <T> Stream<T> zip(Stream<T> stream1, Stream<T> stream2) {
 
-		Iterator<String> iterator1 = stream1.iterator();
-		Iterator<String> iterator2 = stream2.iterator();
+		Iterator<T> iterator1 = stream1.iterator();
+		Iterator<T> iterator2 = stream2.iterator();
 
-		Builder<Object> streamBuilder = Stream.builder();
+		Builder<T> streamBuilder = Stream.builder();
 
 		// achtung -> forEachRemaining braucht ein consumer!
 		// andere Variante wäre iterator.forEach ...
